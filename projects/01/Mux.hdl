@@ -10,9 +10,18 @@
  */
 
 CHIP Mux {
+
+/**
+* Sel is either 1 or 0
+* Since "b" has sel and "a" has notSel;
+*/
+
     IN a, b, sel;
     OUT out;
 
     PARTS:
-    // Put your code here:
+    Not (in=sel, out=notSel);
+    And (a=a, b=notSel, out=aAndNotSel);
+    And (a=sel, b=b, out=bAndSel);
+    Or (a=aAndNotSel, b=bAndSel, out=out);
 }
